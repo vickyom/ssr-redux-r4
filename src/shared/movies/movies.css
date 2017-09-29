@@ -1,0 +1,149 @@
+.list-group { width: 100%; max-width: 1440px; margin: 20px auto;}
+.movCars{
+    display: inline-block;
+    width: calc(100% / 5 - 25px);
+    margin: 0 10px 10px;
+    position: relative;
+    box-shadow: 0 0 10px 5px #d1d1d1;
+}  
+.card-img { position: relative;}
+.card-img:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    left: 0;
+    top: 0;
+}  
+.card-img .ImgClass{
+    width: 100%;
+    height: 345px;
+}
+
+.movDat{
+    position: absolute;
+    top:15px;
+    left: 50%;
+    color: #fff;
+    width: 90%;
+    transform: translate(-50%, 0%);
+    -ms-transform: translate(-50% 0%);
+    -webkit-transform: translate(-50% 0%);
+}
+.movDat .mdate { float: left; width: 50%; text-align: left;}
+.movDat .mfav { float: right; width: 50%; text-align: right;}
+.movCars > div {  position: relative;}
+.movTit{
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    color: #fff;
+    line-height:0px;  
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: left;  
+    width: 90%;
+}
+.movTit span  {
+    line-height: 15px;
+}
+.movTit h4 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    line-height: 25px;
+    margin: 0 0 10px;
+}
+.navbar{
+    background: #000;
+    
+}
+    .navbar nav { height: 50px; line-height: 50px; margin-left: 15px; width: 100%;
+padding: 0 15px;  max-width: 1440px; margin: 0 auto;}
+.navbar a {
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+}
+.selfilter {
+    max-width: 1440px; margin: 25px auto 0;
+}
+.selfilter select{
+    -webkit-appearance: button;
+    border: 1px solid #d2d2d2;
+    box-shadow: none;
+    background: none;
+    height: 30px;
+    font-size: 14px;
+    padding-left: 15px;
+    min-width: 150px;
+    max-width: 150px;
+    color: #555;
+    font-size: inherit;
+    margin: 3px;
+    overflow: hidden;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    }
+    .heart{
+        position: relative;
+        width: 20px;
+        height: 15px;
+        float: right;
+        margin-left: 5px;
+    }
+    .heart:before,
+    .heart:after{
+        position: absolute;
+        content: "";
+        left: 10px;
+        top: 0;
+        width: 10px;
+        height: 15px;
+        background: #fff;
+        -moz-border-radius: 50px 50px 0 0;
+        border-radius: 10px 10px 0 0;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        -webkit-transform-origin: 0 100%;
+        -moz-transform-origin: 0 100%;
+        -ms-transform-origin: 0 100%;
+        -o-transform-origin: 0 100%;
+        transform-origin: 0 100%;
+    }
+    .heart:after{
+        left: 0;
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+        -webkit-transform-origin: 100% 100%;
+        -moz-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+        -o-transform-origin: 100% 100%;
+        transform-origin: 100% 100%;
+    }
+    .heart:hover:before, .heart:hover:after,  .heart.__active:after,  .heart.__active:before {
+        background: #fc2e5a;
+    }
+    .serachbx {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-top: 18px;
+        margin-right: 15px;
+
+    }
+    .serachbx input {
+        height: 23px;
+        min-width: 180px;
+    }
