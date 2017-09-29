@@ -1,10 +1,10 @@
-import { combineReducers } from "redux";
-import movies from "./movies/moviesReducers";
-import newsReducer from "./ducks";
+import { combineReducers } from 'redux'
+import movies from './movies/moviesReducers'
+import newsReducer from './ducks'
 
 const rootReducer = combineReducers({
-    movies,
-    newsReducer
-});
+	movies,
+	newsReducer
+})
 
-export default rootReducer;
+export default rootReducer
