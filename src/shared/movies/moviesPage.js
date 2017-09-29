@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {
 	loadMovs,
-	fnSortByRet,
 	fnFilterMov,
 	fnSearch
 } from './moviesActionCreator'
@@ -13,17 +12,11 @@ import { getfilterList } from './selectors'
 
 class MoviesPage extends React.Component {
 	componentDidMount() {
-		console.log('asdsadsadasdsdsa')
 		// this.props.dispatch(loadMovs())
 		// if (!this.props.movies) {
-		if (this.props.match.params.year) {
-			console.log('year action')
-			this.props.dispatch(loadMovs())
-			this.props.dispatch(fnFilterMov(this.props.match.params.year))
-		} else {
-			console.log('init action')
-			this.props.dispatch(MoviesPage.initialAction())
-		}
+     
+		this.props.dispatch(MoviesPage.initialAction())
+       
 
 		// }
 	}
@@ -55,8 +48,6 @@ class MoviesPage extends React.Component {
 	}
 
 	handleChange(value) {
-		console.log('Movies page year handleChange')
-
 		this.props.dispatch(fnFilterMov(value))
 	}
 	filterList(event) {
@@ -96,8 +87,7 @@ class MoviesPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-	console.log('mapStateToProps  - - -- --')
-	console.log(state)
+    
 	return {
 		movies: getfilterList(state),
 		year: state.movies.year,
