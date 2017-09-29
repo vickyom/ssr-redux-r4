@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "precommit": "lint-staged",
+    "prepush" : "lint-staged",
     "start-dev": "NODE_ENV=development webpack -w & NODE_ENV=development nodemon server.js",
     "elint": "eslint  'src/**' . — ext .js — ext .jsx --cache --fix --ignore-path .eslintignore",
     "pretty": "prettier --write --tab-width 4 \"src/**/*.js\"",
