@@ -4,19 +4,20 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "precommit": "lint-staged",
     "start-dev": "NODE_ENV=development webpack -w & NODE_ENV=development nodemon server.js",
     "elint": "eslint  'src/**' . — ext .js — ext .jsx --cache --fix --ignore-path .eslintignore",
     "pretty": "prettier --write --tab-width 4 \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "lint-staged": {
-    "*.js": [
-      "npm run pretty",
-      "git add"
-    ]
-  },
+        "*.js": [
+            "eslint --cache --fix --ignore-path .eslintignore",
+            "git add"
+        ]
+    },
   "keywords": [],
-  "author": "",
+  "author": "Vikas Abhale",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.4",
