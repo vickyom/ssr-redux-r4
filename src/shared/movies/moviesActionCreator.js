@@ -47,7 +47,7 @@ export const loadMovs = () => (dispatch, getState) => {
 
 // This function check the data in store
 function fnCheckState(state) {
-    console.log('fnCheckState - - - - - --  -- -- ');
+    console.log('fnCheckState - - - - - --  -- -- ')
     const movies = state.movies
 
     let shouldFetch = true
