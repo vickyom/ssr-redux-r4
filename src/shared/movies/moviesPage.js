@@ -96,7 +96,7 @@ class MoviesPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-	console.log('mapStateToProps  - - -- -- ')
+	console.log('mapStateToProps  - - -- --')
 	console.log(state)
 	return {
 		movies: getfilterList(state),
