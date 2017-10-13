@@ -1,10 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {
-	loadMovs,
-	fnFilterMov,
-	fnSearch
-} from './moviesActionCreator'
+import { loadMovs, fnFilterMov, fnSearch } from './moviesActionCreator'
 import MoviesList from './moviesList'
 import MovSelect from './MovSelect'
 import { fnAllFilter } from './moviesAction'
@@ -14,9 +10,8 @@ class MoviesPage extends React.Component {
 	componentDidMount() {
 		// this.props.dispatch(loadMovs())
 		// if (!this.props.movies) {
-     
+
 		this.props.dispatch(MoviesPage.initialAction())
-       
 
 		// }
 	}
@@ -87,7 +82,6 @@ class MoviesPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    
 	return {
 		movies: getfilterList(state),
 		year: state.movies.year,

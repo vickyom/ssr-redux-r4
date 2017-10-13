@@ -32,6 +32,9 @@ module.exports = {
         "semi": [
             "error",
             "never"
-        ]
+        ],
+        "react/prop-types":0,
+        "react/no-unused-prop-types":0,
+        "react/react-in-jsx-scope":0,
     }
 };

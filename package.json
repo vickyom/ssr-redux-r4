@@ -1,61 +1,60 @@
 {
-  "name": "react-ssr",
-  "version": "0.1.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    // "precommit": "eslint --cache --fix --ignore-path .eslintignore",
-    // "prepush" : "lint-staged",
-    "start-dev": "NODE_ENV=development webpack -w & NODE_ENV=development nodemon server.js",
-    "elint": "eslint  'src/**' . — ext .js — ext .jsx --cache --fix --ignore-path .eslintignore",
-    "pretty": "prettier --write --tab-width 4 \"src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "pre-commit": [ "elint" ],
-  // "lint-staged": {
-  //       "*.js": [
-  //           "eslint --cache --fix --ignore-path .eslintignore",
-  //           "git add"
-  //       ]
-  //   },
-  "keywords": [],
-  "author": "Vikas Abhale",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.4",
-    "express": "^4.15.3",
-    "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.17.4",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-redux": "^5.0.5",
-    "react-router-dom": "^4.1.2",
-    "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
-    "reselect": "^3.0.1",
-    "serialize-javascript": "^1.4.0",
-    "source-map-support": "^0.4.15"
-  },
-  "devDependencies": {
-    "autoprefixer": "^7.1.2",
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.1",
-    "babel-preset-react-app": "^3.0.1",
-    "css-loader": "^0.28.4",
-    "eslint": "^4.7.2",
-    "eslint-friendly-formatter": "^3.0.0",
-    "eslint-loader": "^1.9.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-prettier": "^2.3.1",
-    "eslint-plugin-react": "^7.4.0",
-    "extract-text-webpack-plugin": "^2.1.2",
-    "file-loader": "^0.11.2",
-    "husky": "^0.14.3",
-    "lint-staged": "^4.2.3",
-    "nodemon": "^1.11.0",
-    "postcss-loader": "^2.0.6",
-    "prettier": "1.7.2",
-    "webpack": "^3.1.0"
-  }
+    "name": "react-ssr",
+    "version": "0.1.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "start-dev": "NODE_ENV=development webpack -w & NODE_ENV=development nodemon server.js",
+        "elint": "eslint  'src/**' . — ext .js — ext .jsx --cache --fix --ignore-path .eslintignore",
+        "pretty": "prettier --write --tab-width 4 \"src/**/*.js\"",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "precommit": "lint-staged"
+    },
+    "lint-staged": {
+        "*.js": [
+            "elint --fix",
+            "git add"
+        ]
+    },
+    "keywords": [],
+    "author": "Vikas Abhale",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.4",
+        "cosmiconfig": "^3.1.0",
+        "express": "^4.15.3",
+        "isomorphic-fetch": "^2.2.1",
+        "lodash": "^4.17.4",
+        "react": "^15.6.1",
+        "react-dom": "^15.6.1",
+        "react-redux": "^5.0.5",
+        "react-router-dom": "^4.1.2",
+        "redux": "^3.7.2",
+        "redux-thunk": "^2.2.0",
+        "reselect": "^3.0.1",
+        "serialize-javascript": "^1.4.0",
+        "source-map-support": "^0.4.15"
+    },
+    "devDependencies": {
+        "autoprefixer": "^7.1.2",
+        "babel-core": "^6.25.0",
+        "babel-loader": "^7.1.1",
+        "babel-preset-react-app": "^3.0.1",
+        "css-loader": "^0.28.4",
+        "eslint": "^4.7.2",
+        "eslint-friendly-formatter": "^3.0.0",
+        "eslint-loader": "^1.9.0",
+        "eslint-plugin-import": "^2.7.0",
+        "eslint-plugin-jsx-a11y": "^6.0.2",
+        "eslint-plugin-prettier": "^2.3.1",
+        "eslint-plugin-react": "^7.4.0",
+        "extract-text-webpack-plugin": "^2.1.2",
+        "file-loader": "^0.11.2",
+        "husky": "0.14.3",
+        "lint-staged": "4.2.3",
+        "nodemon": "^1.11.0",
+        "postcss-loader": "^2.0.6",
+        "prettier": "1.7.2",
+        "webpack": "^3.1.0"
+    }
 }
