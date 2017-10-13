@@ -11,7 +11,7 @@ import {
 
 export const loadMovs = () => (dispatch, getState) => {
     console.log(1)
-    
+    console.log('w')
     // This condtion check if data avl in store or not.Then call API
     if (fnCheckState(getState())) {
         dispatch(MoviesIsLoading(true))
