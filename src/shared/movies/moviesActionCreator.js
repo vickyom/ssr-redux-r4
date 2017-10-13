@@ -17,7 +17,7 @@ export const loadMovs = () => (dispatch, getState) => {
         dispatch(MoviesIsLoading(true))
         // API call
         return fetch(
-            'https://api.themoviedb.org/3/movie/popular?api_key=e2df83ac84acb977bef0b1fd007c11ad'
+            'https://api.themoviedb.org/3/movie/popular?api_key={key}'
         )
             .then(response => response.json())
             .then(movs => {

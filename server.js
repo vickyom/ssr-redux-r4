@@ -21584,23 +21584,23 @@ Link.contextTypes = {
 
 
 var routes = [{
-    path: "/",
-    exact: true,
-    component: __WEBPACK_IMPORTED_MODULE_0__home__["a" /* default */],
-    type: "serverRoutes"
+	path: '/',
+	exact: true,
+	component: __WEBPACK_IMPORTED_MODULE_0__home__["a" /* default */],
+	type: 'serverRoutes'
 }, {
-    path: "/news",
-    component: __WEBPACK_IMPORTED_MODULE_1__news__["a" /* default */],
-    type: "serverRoutes"
+	path: '/news',
+	component: __WEBPACK_IMPORTED_MODULE_1__news__["a" /* default */],
+	type: 'serverRoutes'
 }, {
-    path: "/movies",
-    exact: true,
-    component: __WEBPACK_IMPORTED_MODULE_2__movies_MoviesPage__["a" /* default */],
-    type: "serverRoutes"
+	path: '/movies',
+	exact: true,
+	component: __WEBPACK_IMPORTED_MODULE_2__movies_MoviesPage__["a" /* default */],
+	type: 'serverRoutes'
 }, {
-    path: "/movies/:year",
-    component: __WEBPACK_IMPORTED_MODULE_2__movies_MoviesPage__["a" /* default */],
-    type: "serverRoutes"
+	path: '/movies/:year',
+	component: __WEBPACK_IMPORTED_MODULE_2__movies_MoviesPage__["a" /* default */],
+	type: 'serverRoutes'
 }];
 
 /* harmony default export */ __webpack_exports__["a"] = (routes);
@@ -21617,46 +21617,46 @@ var routes = [{
 
 
 // Actions
-var FETCH_NEWS_REQUEST = "FETCH_NEWS_REQUEST";
-var FETCH_NEWS_SUCCESS = "FETCH_NEWS_SUCCESS";
-var FETCH_NEWS_FAILURE = "FETCH_NEWS_FAILURE";
+var FETCH_NEWS_REQUEST = 'FETCH_NEWS_REQUEST';
+var FETCH_NEWS_SUCCESS = 'FETCH_NEWS_SUCCESS';
+var FETCH_NEWS_FAILURE = 'FETCH_NEWS_FAILURE';
 
 // Reducer
 function newsReducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var action = arguments[1];
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	var action = arguments[1];
 
-    switch (action.type) {
-        case FETCH_NEWS_SUCCESS:
-            return Object.assign({}, state, { news: action.payload });
+	switch (action.type) {
+		case FETCH_NEWS_SUCCESS:
+			return Object.assign({}, state, { news: action.payload });
 
-        default:
-            return state;
-    }
+		default:
+			return state;
+	}
 }
 
 // Action Creators
 var requestNews = function requestNews() {
-    return { type: FETCH_NEWS_REQUEST };
+	return { type: FETCH_NEWS_REQUEST };
 };
 var receivedNews = function receivedNews(news) {
-    return { type: FETCH_NEWS_SUCCESS, payload: news };
+	return { type: FETCH_NEWS_SUCCESS, payload: news };
 };
 var newsError = function newsError() {
-    return { type: FETCH_NEWS_FAILURE };
+	return { type: FETCH_NEWS_FAILURE };
 };
 
 var fetchNews = function fetchNews() {
-    return function (dispatch, getState) {
-        dispatch(requestNews());
-        return fetch("http://localhost:3001/api/news").then(function (response) {
-            return response.json();
-        }).then(function (news) {
-            return dispatch(receivedNews(news));
-        }).catch(function (err) {
-            return dispatch(newsError(err));
-        });
-    };
+	return function (dispatch, getState) {
+		dispatch(requestNews());
+		return fetch('http://localhost:3001/api/news').then(function (response) {
+			return response.json();
+		}).then(function (news) {
+			return dispatch(receivedNews(news));
+		}).catch(function (err) {
+			return dispatch(newsError(err));
+		});
+	};
 };
 
 /***/ }),
@@ -22737,11 +22737,13 @@ __webpack_require__(24).inherits(FetchError, Error);
 
 var loadMovs = function loadMovs() {
     return function (dispatch, getState) {
+        console.log(1);
+        console.log('w');
         // This condtion check if data avl in store or not.Then call API
         if (fnCheckState(getState())) {
             dispatch(__WEBPACK_IMPORTED_MODULE_1__moviesAction__["a" /* MoviesIsLoading */](true));
             // API call
-            return fetch("https://api.themoviedb.org/3/movie/popular?api_key=e2df83ac84acb977bef0b1fd007c11ad").then(function (response) {
+            return fetch('https://api.themoviedb.org/3/movie/popular?api_key={key}').then(function (response) {
                 return response.json();
             }).then(function (movs) {
                 // Create the seprate resultset for
@@ -22754,7 +22756,7 @@ var loadMovs = function loadMovs() {
                     for (var _iterator = movs.results[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                         var value = _step.value;
 
-                        value = value.release_date.split("-")[0];
+                        value = value.release_date.split('-')[0];
                         release_date1.push(value);
                     }
                 } catch (err) {
@@ -22778,8 +22780,8 @@ var loadMovs = function loadMovs() {
                 dispatch(__WEBPACK_IMPORTED_MODULE_1__moviesAction__["d" /* loadMovYearSuccess */](uniqueNames));
                 dispatch(__WEBPACK_IMPORTED_MODULE_1__moviesAction__["a" /* MoviesIsLoading */](false));
                 var ShowAllData = {
-                    FilterData: "",
-                    filterType: "SHOW_ALL"
+                    FilterData: '',
+                    filterType: 'SHOW_ALL'
                 };
                 dispatch(__WEBPACK_IMPORTED_MODULE_1__moviesAction__["b" /* fnAllFilter */](ShowAllData));
             });
@@ -22802,7 +22804,7 @@ function fnFilterMov(SelYear) {
     return function (dispatch) {
         var YearData = {
             FilterData: SelYear,
-            filterType: "YEAR"
+            filterType: 'YEAR'
         };
         dispatch(__WEBPACK_IMPORTED_MODULE_1__moviesAction__["b" /* fnAllFilter */](YearData));
     };
@@ -22813,7 +22815,7 @@ function fnSearch(SearchData) {
     return function (dispatch, getState) {
         var SearData = {
             FilterData: SearchData,
-            filterType: "SEARCH"
+            filterType: 'SEARCH'
         };
         dispatch(__WEBPACK_IMPORTED_MODULE_1__moviesAction__["b" /* fnAllFilter */](SearData));
         // dispatch(fnSearchText(SearchData));
@@ -22822,10 +22824,10 @@ function fnSearch(SearchData) {
 
 //This function set the cookie
 function fnSetFavMov(movID) {
-    if (!getCookie("FavMov").includes(movID)) {
-        var allMovID = "";
-        allMovID = getCookie("FavMov") + "|" + movID;
-        createCookie("FavMov", allMovID);
+    if (!getCookie('FavMov').includes(movID)) {
+        var allMovID = '';
+        allMovID = getCookie('FavMov') + '|' + movID;
+        createCookie('FavMov', allMovID);
     }
 }
 
@@ -22844,30 +22846,30 @@ function fnSetFavMov(movID) {
 
 //Action for  Movies HasErrored
 function MoviesHasErrored(bool) {
-    return {
-        type: __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["d" /* MOVIE_HAS_ERRORED */],
-        hasErrored: bool
-    };
+	return {
+		type: __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["d" /* MOVIE_HAS_ERRORED */],
+		hasErrored: bool
+	};
 }
 
 //Action for  Movies IsLoading
 function MoviesIsLoading(bool) {
-    return { type: __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["e" /* MOVIE_IS_LOADING */], bool: bool };
+	return { type: __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["e" /* MOVIE_IS_LOADING */], bool: bool };
 }
 //Action for load Movies Successfully
 function loadMovSuccess(movs) {
-    return { type: __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["b" /* LOAD_MOVIE_SUCCESS */], movs: movs };
+	return { type: __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["b" /* LOAD_MOVIE_SUCCESS */], movs: movs };
 }
 
 //Action Year
 function loadMovYearSuccess(yearData) {
-    return { type: __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["c" /* LOAD_MOVIE_YEAR */], yearData: yearData };
+	return { type: __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["c" /* LOAD_MOVIE_YEAR */], yearData: yearData };
 }
 
 //Commaon for all filter
 function fnAllFilter(filterType) {
-    console.log(filterType);
-    return { type: __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["a" /* LOAD_MOVIE_ALLFILTER */], filterType: filterType };
+	console.log(filterType);
+	return { type: __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["a" /* LOAD_MOVIE_ALLFILTER */], filterType: filterType };
 }
 
 /***/ }),
@@ -22880,11 +22882,11 @@ function fnAllFilter(filterType) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return MOVIE_IS_LOADING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return LOAD_MOVIE_YEAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LOAD_MOVIE_ALLFILTER; });
-var LOAD_MOVIE_SUCCESS = "LOAD_MOVIE_SUCCESS";
-var MOVIE_HAS_ERRORED = "MOVIE_HAS_ERRORED";
-var MOVIE_IS_LOADING = "MOVIE_IS_LOADING";
-var LOAD_MOVIE_YEAR = "LOAD_MOVIE_YEAR";
-var LOAD_MOVIE_ALLFILTER = "LOAD_MOVIE_ALLFILTER";
+var LOAD_MOVIE_SUCCESS = 'LOAD_MOVIE_SUCCESS';
+var MOVIE_HAS_ERRORED = 'MOVIE_HAS_ERRORED';
+var MOVIE_IS_LOADING = 'MOVIE_IS_LOADING';
+var LOAD_MOVIE_YEAR = 'LOAD_MOVIE_YEAR';
+var LOAD_MOVIE_ALLFILTER = 'LOAD_MOVIE_ALLFILTER';
 
 /***/ }),
 /* 163 */
@@ -23575,7 +23577,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_App__ = __webpack_require__(410);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_source_map_support_register__ = __webpack_require__(412);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_source_map_support_register___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_source_map_support_register__);
-var _jsxFileName = "/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/server/index.js",
+var _jsxFileName = '/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/server/index.js',
     _this = this;
 
 
@@ -23593,138 +23595,138 @@ var _jsxFileName = "/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/server/index.j
 var app = __WEBPACK_IMPORTED_MODULE_0_express___default.a();
 
 app.use(__WEBPACK_IMPORTED_MODULE_1_cors___default.a());
-app.use(__WEBPACK_IMPORTED_MODULE_0_express___default.a.static("public"));
+app.use(__WEBPACK_IMPORTED_MODULE_0_express___default.a.static('public'));
 
-app.get("/api/news", function (req, res) {
-    res.json([{
-        id: 1,
-        upvotes: 130,
-        title: "Fianto Duri, the complete tutorial",
-        author: "RubeusH",
-        date: new Date("2017-04-14T15:30:00.000Z")
-    }, {
-        id: 2,
-        upvotes: 126,
-        title: "Ordinary Wizarding Levels study guide",
-        author: "BathBabb",
-        date: new Date("2017-04-14T15:30:00.000Z")
-    }, {
-        id: 3,
-        upvotes: 114,
-        title: "Is muggle-baiting ever acceptable?",
-        author: "Falco",
-        date: new Date("2017-04-14T15:30:00.000Z")
-    }, {
-        id: 4,
-        upvotes: 97,
-        title: "Untransfiguration classes to become compulsory at Hogwarts",
-        author: "Baddock",
-        date: new Date("2017-04-14T15:30:00.000Z")
-    }, {
-        id: 5,
-        upvotes: 85,
-        title: "Cracking the Aurologist Interview ",
-        author: "Hetty",
-        date: new Date("2017-04-14T15:30:00.000Z")
-    }, {
-        id: 6,
-        upvotes: 74,
-        title: "Conserving waterplants cheatsheet.",
-        author: "Otto",
-        date: new Date("2017-04-14T15:30:00.000Z")
-    }, {
-        id: 7,
-        upvotes: 66,
-        title: "The Pragmatic Dragon Feeder",
-        author: "Baruffio",
-        date: new Date("2017-04-14T15:30:00.000Z")
-    }, {
-        id: 8,
-        upvotes: 50,
-        title: "The complete quidditch statistics",
-        author: "Hbeery",
-        date: new Date("2017-04-14T15:30:00.000Z")
-    }, {
-        id: 9,
-        upvotes: 34,
-        title: "Cracking the Aurologist Interview ",
-        author: "Marcusb",
-        date: new Date("2017-04-14T15:30:00.000Z")
-    }, {
-        id: 10,
-        upvotes: 29,
-        title: "Could wizards prevent WW3?",
-        author: "Cuthbert",
-        date: new Date("2017-04-14T15:30:00.000Z")
-    }, {
-        id: 11,
-        upvotes: 20,
-        title: "ASK WN: What do you use to digitalize your scrolls?",
-        author: "Alphard",
-        date: new Date("2017-04-14T15:30:00.000Z")
-    }, {
-        id: 12,
-        upvotes: 16,
-        title: "Show WN: Wand-Extinguishing Protection",
-        author: "Humphrey22",
-        date: new Date("2017-04-14T15:30:00.000Z")
-    }]);
+app.get('/api/news', function (req, res) {
+	res.json([{
+		id: 1,
+		upvotes: 130,
+		title: 'Fianto Duri, the complete tutorial',
+		author: 'RubeusH',
+		date: new Date('2017-04-14T15:30:00.000Z')
+	}, {
+		id: 2,
+		upvotes: 126,
+		title: 'Ordinary Wizarding Levels study guide',
+		author: 'BathBabb',
+		date: new Date('2017-04-14T15:30:00.000Z')
+	}, {
+		id: 3,
+		upvotes: 114,
+		title: 'Is muggle-baiting ever acceptable?',
+		author: 'Falco',
+		date: new Date('2017-04-14T15:30:00.000Z')
+	}, {
+		id: 4,
+		upvotes: 97,
+		title: 'Untransfiguration classes to become compulsory at Hogwarts',
+		author: 'Baddock',
+		date: new Date('2017-04-14T15:30:00.000Z')
+	}, {
+		id: 5,
+		upvotes: 85,
+		title: 'Cracking the Aurologist Interview ',
+		author: 'Hetty',
+		date: new Date('2017-04-14T15:30:00.000Z')
+	}, {
+		id: 6,
+		upvotes: 74,
+		title: 'Conserving waterplants cheatsheet.',
+		author: 'Otto',
+		date: new Date('2017-04-14T15:30:00.000Z')
+	}, {
+		id: 7,
+		upvotes: 66,
+		title: 'The Pragmatic Dragon Feeder',
+		author: 'Baruffio',
+		date: new Date('2017-04-14T15:30:00.000Z')
+	}, {
+		id: 8,
+		upvotes: 50,
+		title: 'The complete quidditch statistics',
+		author: 'Hbeery',
+		date: new Date('2017-04-14T15:30:00.000Z')
+	}, {
+		id: 9,
+		upvotes: 34,
+		title: 'Cracking the Aurologist Interview ',
+		author: 'Marcusb',
+		date: new Date('2017-04-14T15:30:00.000Z')
+	}, {
+		id: 10,
+		upvotes: 29,
+		title: 'Could wizards prevent WW3?',
+		author: 'Cuthbert',
+		date: new Date('2017-04-14T15:30:00.000Z')
+	}, {
+		id: 11,
+		upvotes: 20,
+		title: 'ASK WN: What do you use to digitalize your scrolls?',
+		author: 'Alphard',
+		date: new Date('2017-04-14T15:30:00.000Z')
+	}, {
+		id: 12,
+		upvotes: 16,
+		title: 'Show WN: Wand-Extinguishing Protection',
+		author: 'Humphrey22',
+		date: new Date('2017-04-14T15:30:00.000Z')
+	}]);
 });
 
-app.get("*", function (req, res, next) {
-    var store = __WEBPACK_IMPORTED_MODULE_8__shared_configureStore__["a" /* default */]();
+app.get('*', function (req, res, next) {
+	var store = __WEBPACK_IMPORTED_MODULE_8__shared_configureStore__["a" /* default */]();
 
-    // const currentRoute = routes.find(route => matchPath(req.url, route));
-    // const promises =  currentRoute.component.initialAction && currentRoute.component.initialAction();
+	// const currentRoute = routes.find(route => matchPath(req.url, route));
+	// const promises =  currentRoute.component.initialAction && currentRoute.component.initialAction();
 
-    // console.log(res)
-    var promises = __WEBPACK_IMPORTED_MODULE_7__shared_routes__["a" /* default */].reduce(function (acc, route) {
-        // console.log(req);
-        if (__WEBPACK_IMPORTED_MODULE_5_react_router_dom__["d" /* matchPath */](req.url, route) && route.component && route.component.initialAction) {
-            if (route.type == "serverRoutes") {
-                console.log(route.path);
-                acc.push(Promise.resolve(store.dispatch(route.component.initialAction())));
-            }
-        }
+	// console.log(res)
+	var promises = __WEBPACK_IMPORTED_MODULE_7__shared_routes__["a" /* default */].reduce(function (acc, route) {
+		// console.log(req);
+		if (__WEBPACK_IMPORTED_MODULE_5_react_router_dom__["d" /* matchPath */](req.url, route) && route.component && route.component.initialAction) {
+			if (route.type == 'serverRoutes') {
+				console.log(route.path);
+				acc.push(Promise.resolve(store.dispatch(route.component.initialAction())));
+			}
+		}
 
-        return acc;
-    }, []);
+		return acc;
+	}, []);
 
-    Promise.all(promises).then(function () {
-        var context = {};
+	Promise.all(promises).then(function () {
+		var context = {};
 
-        var markup = __WEBPACK_IMPORTED_MODULE_3_react_dom_server__["renderToString"](__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_4_react_redux__["a" /* Provider */],
-            { store: store, __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 139
-                },
-                __self: _this
-            },
-            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["c" /* StaticRouter */],
-                { location: req.url, context: context, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 140
-                    },
-                    __self: _this
-                },
-                __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__shared_App__["a" /* default */], {
-                    __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 141
-                    },
-                    __self: _this
-                })
-            )
-        ));
-        var initialData = store.getState();
-        res.send("\n        <!DOCTYPE html>\n        <html>\n          <head>\n            <title>W Combinator</title>\n            <link rel=\"stylesheet\" href=\"/css/main.css\">\n            <script src=\"/bundle.js\" defer></script>\n            <script>window.__initialData__ = " + __WEBPACK_IMPORTED_MODULE_6_serialize_javascript___default.a(initialData) + "</script>\n          </head>\n\n          <body>\n            <div id=\"root\">" + markup + "</div>\n          </body>\n        </html>\n      ");
-    }).catch(next);
+		var markup = __WEBPACK_IMPORTED_MODULE_3_react_dom_server__["renderToString"](__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+			__WEBPACK_IMPORTED_MODULE_4_react_redux__["a" /* Provider */],
+			{ store: store, __source: {
+					fileName: _jsxFileName,
+					lineNumber: 139
+				},
+				__self: _this
+			},
+			__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+				__WEBPACK_IMPORTED_MODULE_5_react_router_dom__["c" /* StaticRouter */],
+				{ location: req.url, context: context, __source: {
+						fileName: _jsxFileName,
+						lineNumber: 140
+					},
+					__self: _this
+				},
+				__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__shared_App__["a" /* default */], {
+					__source: {
+						fileName: _jsxFileName,
+						lineNumber: 141
+					},
+					__self: _this
+				})
+			)
+		));
+		var initialData = store.getState();
+		res.send('\n        <!DOCTYPE html>\n        <html>\n          <head>\n            <title>W Combinator</title>\n            <link rel="stylesheet" href="/css/main.css">\n            <script src="/bundle.js" defer></script>\n            <script>window.__initialData__ = ' + __WEBPACK_IMPORTED_MODULE_6_serialize_javascript___default.a(initialData) + '</script>\n          </head>\n\n          <body>\n            <div id="root">' + markup + '</div>\n          </body>\n        </html>\n      ');
+	}).catch(next);
 });
 
 app.listen(process.env.PORT || 3001, function () {
-    console.log("Server is listening");
+	console.log('Server is listening');
 });
 
 /***/ }),
@@ -59326,7 +59328,7 @@ module.exports = function serialize(obj, options) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__wizards_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__wizards_jpg__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__index_css__ = __webpack_require__(367);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__index_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__index_css__);
-var _jsxFileName = "/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/shared/home/index.js";
+var _jsxFileName = '/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/shared/home/index.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -59343,31 +59345,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var Home = function (_Component) {
-    _inherits(Home, _Component);
+	_inherits(Home, _Component);
 
-    function Home() {
-        _classCallCheck(this, Home);
+	function Home() {
+		_classCallCheck(this, Home);
 
-        return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
-    }
+		return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+	}
 
-    _createClass(Home, [{
-        key: "render",
-        value: function render() {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
-                { className: "home", __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 9
-                    },
-                    __self: this
-                },
-                "Welcome to BMS"
-            );
-        }
-    }]);
+	_createClass(Home, [{
+		key: 'render',
+		value: function render() {
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'div',
+				{ className: 'home', __source: {
+						fileName: _jsxFileName,
+						lineNumber: 9
+					},
+					__self: this
+				},
+				'Welcome to BMS'
+			);
+		}
+	}]);
 
-    return Home;
+	return Home;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (Home);
@@ -59400,7 +59402,7 @@ module.exports = "/media/wizards.jpg";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__(79);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ducks__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__NewsList__ = __webpack_require__(397);
-var _jsxFileName = "/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/shared/news/index.js";
+var _jsxFileName = '/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/shared/news/index.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -59416,49 +59418,49 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var News = function (_Component) {
-    _inherits(News, _Component);
+	_inherits(News, _Component);
 
-    function News() {
-        _classCallCheck(this, News);
+	function News() {
+		_classCallCheck(this, News);
 
-        return _possibleConstructorReturn(this, (News.__proto__ || Object.getPrototypeOf(News)).apply(this, arguments));
-    }
+		return _possibleConstructorReturn(this, (News.__proto__ || Object.getPrototypeOf(News)).apply(this, arguments));
+	}
 
-    _createClass(News, [{
-        key: "componentDidMount",
-        value: function componentDidMount() {
-            if (!this.props.news) {
-                console.log("Componant did mount");
-                this.props.dispatch(News.initialAction());
-            }
-        }
-    }, {
-        key: "render",
-        value: function render() {
-            var news = this.props.news;
+	_createClass(News, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			if (!this.props.news) {
+				console.log('Componant did mount');
+				this.props.dispatch(News.initialAction());
+			}
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var news = this.props.news;
 
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__NewsList__["a" /* default */], { news: news, __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 21
-                },
-                __self: this
-            });
-        }
-    }], [{
-        key: "initialAction",
-        value: function initialAction() {
-            console.log("initialAction");
-            return __WEBPACK_IMPORTED_MODULE_2__ducks__["b" /* fetchNews */]();
-        }
-    }]);
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__NewsList__["a" /* default */], { news: news, __source: {
+					fileName: _jsxFileName,
+					lineNumber: 21
+				},
+				__self: this
+			});
+		}
+	}], [{
+		key: 'initialAction',
+		value: function initialAction() {
+			console.log('initialAction');
+			return __WEBPACK_IMPORTED_MODULE_2__ducks__["b" /* fetchNews */]();
+		}
+	}]);
 
-    return News;
+	return News;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
-    return {
-        news: state.newsReducer.news
-    };
+	return {
+		news: state.newsReducer.news
+	};
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_1_react_redux__["b" /* connect */](mapStateToProps)(News));
@@ -67504,81 +67506,81 @@ Request.prototype.clone = function() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NewsList_css__ = __webpack_require__(398);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NewsList_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NewsList_css__);
-var _jsxFileName = "/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/shared/news/NewsList.js";
+var _jsxFileName = '/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/shared/news/NewsList.js';
 
 
 
 function NewsList(_ref) {
-    var _this = this;
+	var _this = this;
 
-    var news = _ref.news;
+	var news = _ref.news;
 
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "div",
-        { className: "newslist", __source: {
-                fileName: _jsxFileName,
-                lineNumber: 6
-            },
-            __self: this
-        },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "div",
-            { className: "header", __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 7
-                },
-                __self: this
-            },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "strong",
-                {
-                    __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 8
-                    },
-                    __self: this
-                },
-                "Wizard News"
-            )
-        ),
-        news && news.map(function (post) {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
-                { key: post.id, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 12
-                    },
-                    __self: _this
-                },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "p",
-                    {
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 13
-                        },
-                        __self: _this
-                    },
-                    post.id,
-                    " \u2B06 ",
-                    post.title
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "small",
-                    {
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 16
-                        },
-                        __self: _this
-                    },
-                    post.upvotes,
-                    " upvotes by ",
-                    post.author
-                )
-            );
-        })
-    );
+	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+		'div',
+		{ className: 'newslist', __source: {
+				fileName: _jsxFileName,
+				lineNumber: 6
+			},
+			__self: this
+		},
+		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+			'div',
+			{ className: 'header', __source: {
+					fileName: _jsxFileName,
+					lineNumber: 7
+				},
+				__self: this
+			},
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'strong',
+				{
+					__source: {
+						fileName: _jsxFileName,
+						lineNumber: 8
+					},
+					__self: this
+				},
+				'Wizard News'
+			)
+		),
+		news && news.map(function (post) {
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'div',
+				{ key: post.id, __source: {
+						fileName: _jsxFileName,
+						lineNumber: 12
+					},
+					__self: _this
+				},
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'p',
+					{
+						__source: {
+							fileName: _jsxFileName,
+							lineNumber: 13
+						},
+						__self: _this
+					},
+					post.id,
+					' \u2B06 ',
+					post.title
+				),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'small',
+					{
+						__source: {
+							fileName: _jsxFileName,
+							lineNumber: 16
+						},
+						__self: _this
+					},
+					post.upvotes,
+					' upvotes by ',
+					post.author
+				)
+			);
+		})
+	);
 }
 
 /***/ }),
@@ -67600,7 +67602,7 @@ function NewsList(_ref) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__MovSelect__ = __webpack_require__(402);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__moviesAction__ = __webpack_require__(161);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__selectors__ = __webpack_require__(403);
-var _jsxFileName = "/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/shared/movies/MoviesPage.js";
+var _jsxFileName = '/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/shared/movies/MoviesPage.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -67619,207 +67621,207 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var MoviesPage = function (_React$Component) {
-    _inherits(MoviesPage, _React$Component);
+	_inherits(MoviesPage, _React$Component);
 
-    _createClass(MoviesPage, [{
-        key: "componentDidMount",
-        value: function componentDidMount() {
-            // this.props.dispatch(loadMovs())
-            // if (!this.props.movies) {
+	_createClass(MoviesPage, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			// this.props.dispatch(loadMovs())
+			// if (!this.props.movies) {
 
-            this.props.dispatch(MoviesPage.initialAction());
+			this.props.dispatch(MoviesPage.initialAction());
 
-            // }
-        }
-    }], [{
-        key: "initialAction",
-        value: function initialAction() {
-            return __WEBPACK_IMPORTED_MODULE_2__moviesActionCreator__["d" /* loadMovs */]();
-        }
-    }]);
+			// }
+		}
+	}], [{
+		key: 'initialAction',
+		value: function initialAction() {
+			return __WEBPACK_IMPORTED_MODULE_2__moviesActionCreator__["d" /* loadMovs */]();
+		}
+	}]);
 
-    function MoviesPage(props) {
-        _classCallCheck(this, MoviesPage);
+	function MoviesPage(props) {
+		_classCallCheck(this, MoviesPage);
 
-        var _this = _possibleConstructorReturn(this, (MoviesPage.__proto__ || Object.getPrototypeOf(MoviesPage)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (MoviesPage.__proto__ || Object.getPrototypeOf(MoviesPage)).call(this, props));
 
-        _this.handleRetChange = _this.handleRetChange.bind(_this), _this.handleChange = _this.handleChange.bind(_this), _this.filterList = _this.filterList.bind(_this);
-        return _this;
-    }
+		_this.handleRetChange = _this.handleRetChange.bind(_this), _this.handleChange = _this.handleChange.bind(_this), _this.filterList = _this.filterList.bind(_this);
+		return _this;
+	}
 
-    _createClass(MoviesPage, [{
-        key: "handleRetChange",
-        value: function handleRetChange(event) {
-            if (event.target.value == "RL") {
-                var SortAsc = {
-                    FilterData: "",
-                    filterType: "ASC"
-                };
+	_createClass(MoviesPage, [{
+		key: 'handleRetChange',
+		value: function handleRetChange(event) {
+			if (event.target.value == 'RL') {
+				var SortAsc = {
+					FilterData: '',
+					filterType: 'ASC'
+				};
 
-                this.props.dispatch(__WEBPACK_IMPORTED_MODULE_5__moviesAction__["b" /* fnAllFilter */](SortAsc));
-            } else {
-                var SortDsc = {
-                    FilterData: "",
-                    filterType: "DES"
-                };
+				this.props.dispatch(__WEBPACK_IMPORTED_MODULE_5__moviesAction__["b" /* fnAllFilter */](SortAsc));
+			} else {
+				var SortDsc = {
+					FilterData: '',
+					filterType: 'DES'
+				};
 
-                this.props.dispatch(__WEBPACK_IMPORTED_MODULE_5__moviesAction__["b" /* fnAllFilter */](SortDsc));
-            }
-        }
-    }, {
-        key: "handleChange",
-        value: function handleChange(value) {
-            this.props.dispatch(__WEBPACK_IMPORTED_MODULE_2__moviesActionCreator__["a" /* fnFilterMov */](value));
-        }
-    }, {
-        key: "filterList",
-        value: function filterList(event) {
-            this.props.dispatch(__WEBPACK_IMPORTED_MODULE_2__moviesActionCreator__["b" /* fnSearch */](event.target.value.toLowerCase()));
-        }
-    }, {
-        key: "render",
-        value: function render() {
-            var _this2 = this;
+				this.props.dispatch(__WEBPACK_IMPORTED_MODULE_5__moviesAction__["b" /* fnAllFilter */](SortDsc));
+			}
+		}
+	}, {
+		key: 'handleChange',
+		value: function handleChange(value) {
+			this.props.dispatch(__WEBPACK_IMPORTED_MODULE_2__moviesActionCreator__["a" /* fnFilterMov */](value));
+		}
+	}, {
+		key: 'filterList',
+		value: function filterList(event) {
+			this.props.dispatch(__WEBPACK_IMPORTED_MODULE_2__moviesActionCreator__["b" /* fnSearch */](event.target.value.toLowerCase()));
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
 
-            if (this.props.hasErrored) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "p",
-                    {
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 54
-                        },
-                        __self: this
-                    },
-                    "Sorry! There was an error loading the items"
-                );
-            }
-            if (this.props.isLoading) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "p",
-                    {
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 57
-                        },
-                        __self: this
-                    },
-                    "Loading\u2026"
-                );
-            }
+			if (this.props.hasErrored) {
+				return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'p',
+					{
+						__source: {
+							fileName: _jsxFileName,
+							lineNumber: 54
+						},
+						__self: this
+					},
+					'Sorry! There was an error loading the items'
+				);
+			}
+			if (this.props.isLoading) {
+				return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'p',
+					{
+						__source: {
+							fileName: _jsxFileName,
+							lineNumber: 57
+						},
+						__self: this
+					},
+					'Loading\u2026'
+				);
+			}
 
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
-                {
-                    __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 61
-                    },
-                    __self: this
-                },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "serachbx", __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 62
-                        },
-                        __self: this
-                    },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", onChange: this.filterList, __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 63
-                        },
-                        __self: this
-                    })
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "selfilter", __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 65
-                        },
-                        __self: this
-                    },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "select",
-                        { onChange: function onChange(event) {
-                                return _this2.handleRetChange(event);
-                            }, __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 66
-                            },
-                            __self: this
-                        },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "option",
-                            { value: "", __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 67
-                                },
-                                __self: this
-                            },
-                            "Rating"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "option",
-                            { value: "RL", __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 68
-                                },
-                                __self: this
-                            },
-                            "Rating Low"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "option",
-                            { value: "RH", __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 69
-                                },
-                                __self: this
-                            },
-                            "Rating High"
-                        )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__MovSelect__["a" /* default */], {
-                        onSelectYear: this.handleChange,
-                        movYear: this.props.year,
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 71
-                        },
-                        __self: this
-                    })
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    {
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 76
-                        },
-                        __self: this
-                    },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__moviesList__["a" /* default */], { movies: this.props.movies, __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 77
-                        },
-                        __self: this
-                    })
-                )
-            );
-        }
-    }]);
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'div',
+				{
+					__source: {
+						fileName: _jsxFileName,
+						lineNumber: 61
+					},
+					__self: this
+				},
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					{ className: 'serachbx', __source: {
+							fileName: _jsxFileName,
+							lineNumber: 62
+						},
+						__self: this
+					},
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', onChange: this.filterList, __source: {
+							fileName: _jsxFileName,
+							lineNumber: 63
+						},
+						__self: this
+					})
+				),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					{ className: 'selfilter', __source: {
+							fileName: _jsxFileName,
+							lineNumber: 65
+						},
+						__self: this
+					},
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'select',
+						{ onChange: function onChange(event) {
+								return _this2.handleRetChange(event);
+							}, __source: {
+								fileName: _jsxFileName,
+								lineNumber: 66
+							},
+							__self: this
+						},
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'option',
+							{ value: '', __source: {
+									fileName: _jsxFileName,
+									lineNumber: 67
+								},
+								__self: this
+							},
+							'Rating'
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'option',
+							{ value: 'RL', __source: {
+									fileName: _jsxFileName,
+									lineNumber: 68
+								},
+								__self: this
+							},
+							'Rating Low'
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'option',
+							{ value: 'RH', __source: {
+									fileName: _jsxFileName,
+									lineNumber: 69
+								},
+								__self: this
+							},
+							'Rating High'
+						)
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__MovSelect__["a" /* default */], {
+						onSelectYear: this.handleChange,
+						movYear: this.props.year,
+						__source: {
+							fileName: _jsxFileName,
+							lineNumber: 71
+						},
+						__self: this
+					})
+				),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					{
+						__source: {
+							fileName: _jsxFileName,
+							lineNumber: 76
+						},
+						__self: this
+					},
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__moviesList__["a" /* default */], { movies: this.props.movies, __source: {
+							fileName: _jsxFileName,
+							lineNumber: 77
+						},
+						__self: this
+					})
+				)
+			);
+		}
+	}]);
 
-    return MoviesPage;
+	return MoviesPage;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 function mapStateToProps(state) {
-    return {
-        movies: __WEBPACK_IMPORTED_MODULE_6__selectors__["a" /* getfilterList */](state),
-        year: state.movies.year,
-        isLoading: state.movies.MovisLoading
-    };
+	return {
+		movies: __WEBPACK_IMPORTED_MODULE_6__selectors__["a" /* getfilterList */](state),
+		year: state.movies.year,
+		isLoading: state.movies.MovisLoading
+	};
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_1_react_redux__["b" /* connect */](mapStateToProps)(MoviesPage));
@@ -67834,7 +67836,7 @@ function mapStateToProps(state) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__moviesActionCreator__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__movies_css__ = __webpack_require__(401);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__movies_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__movies_css__);
-var _jsxFileName = "/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/shared/movies/moviesList.js";
+var _jsxFileName = '/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/shared/movies/moviesList.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -67849,176 +67851,176 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var MoviesList = function (_React$Component) {
-    _inherits(MoviesList, _React$Component);
+	_inherits(MoviesList, _React$Component);
 
-    function MoviesList(props) {
-        _classCallCheck(this, MoviesList);
+	function MoviesList(props) {
+		_classCallCheck(this, MoviesList);
 
-        var _this = _possibleConstructorReturn(this, (MoviesList.__proto__ || Object.getPrototypeOf(MoviesList)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (MoviesList.__proto__ || Object.getPrototypeOf(MoviesList)).call(this, props));
 
-        _this.handleClick = _this.handleClick.bind(_this);
-        return _this;
-    }
+		_this.handleClick = _this.handleClick.bind(_this);
+		return _this;
+	}
 
-    _createClass(MoviesList, [{
-        key: "handleClick",
-        value: function handleClick(events, MovID) {
-            console.log(2);
-            __WEBPACK_IMPORTED_MODULE_1__moviesActionCreator__["c" /* fnSetFavMov */](MovID.target.id);
-        }
-    }, {
-        key: "render",
-        value: function render() {
-            var _this2 = this;
+	_createClass(MoviesList, [{
+		key: 'handleClick',
+		value: function handleClick(events, MovID) {
+			console.log(2);
+			__WEBPACK_IMPORTED_MODULE_1__moviesActionCreator__["c" /* fnSetFavMov */](MovID.target.id);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
 
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
-                { className: "list-group", __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 16
-                    },
-                    __self: this
-                },
-                this.props.movies.map(function (mov) {
-                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "div",
-                        { key: mov.id, className: "movCars", __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 18
-                            },
-                            __self: _this2
-                        },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "div",
-                            {
-                                __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 19
-                                },
-                                __self: _this2
-                            },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "div",
-                                { className: "card-img", __source: {
-                                        fileName: _jsxFileName,
-                                        lineNumber: 20
-                                    },
-                                    __self: _this2
-                                },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", {
-                                    className: "ImgClass",
-                                    src: "http://image.tmdb.org/t/p/w185/" + mov.poster_path,
-                                    alt: "",
-                                    __source: {
-                                        fileName: _jsxFileName,
-                                        lineNumber: 21
-                                    },
-                                    __self: _this2
-                                })
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "div",
-                                { className: "movDat", __source: {
-                                        fileName: _jsxFileName,
-                                        lineNumber: 27
-                                    },
-                                    __self: _this2
-                                },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "div",
-                                    { className: "mdate", __source: {
-                                            fileName: _jsxFileName,
-                                            lineNumber: 28
-                                        },
-                                        __self: _this2
-                                    },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "span",
-                                        {
-                                            __source: {
-                                                fileName: _jsxFileName,
-                                                lineNumber: 29
-                                            },
-                                            __self: _this2
-                                        },
-                                        mov.release_date
-                                    )
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "div",
-                                    { className: "mfav", __source: {
-                                            fileName: _jsxFileName,
-                                            lineNumber: 31
-                                        },
-                                        __self: _this2
-                                    },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-                                        id: mov.id,
-                                        "data-mov": mov.id,
-                                        onClick: _this2.handleClick.bind(_this2, mov.id),
-                                        className: "heart",
-                                        __source: {
-                                            fileName: _jsxFileName,
-                                            lineNumber: 32
-                                        },
-                                        __self: _this2
-                                    }),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        "span",
-                                        {
-                                            __source: {
-                                                fileName: _jsxFileName,
-                                                lineNumber: 41
-                                            },
-                                            __self: _this2
-                                        },
-                                        mov.vote_average
-                                    )
-                                )
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "div",
-                                { className: "movTit", __source: {
-                                        fileName: _jsxFileName,
-                                        lineNumber: 44
-                                    },
-                                    __self: _this2
-                                },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "span",
-                                    {
-                                        __source: {
-                                            fileName: _jsxFileName,
-                                            lineNumber: 45
-                                        },
-                                        __self: _this2
-                                    },
-                                    mov.original_language
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "h4",
-                                    {
-                                        __source: {
-                                            fileName: _jsxFileName,
-                                            lineNumber: 46
-                                        },
-                                        __self: _this2
-                                    },
-                                    mov.title
-                                )
-                            )
-                        )
-                    );
-                })
-            );
-        }
-    }]);
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'div',
+				{ className: 'list-group', __source: {
+						fileName: _jsxFileName,
+						lineNumber: 16
+					},
+					__self: this
+				},
+				this.props.movies.map(function (mov) {
+					return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'div',
+						{ key: mov.id, className: 'movCars', __source: {
+								fileName: _jsxFileName,
+								lineNumber: 18
+							},
+							__self: _this2
+						},
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'div',
+							{
+								__source: {
+									fileName: _jsxFileName,
+									lineNumber: 19
+								},
+								__self: _this2
+							},
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'div',
+								{ className: 'card-img', __source: {
+										fileName: _jsxFileName,
+										lineNumber: 20
+									},
+									__self: _this2
+								},
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
+									className: 'ImgClass',
+									src: 'http://image.tmdb.org/t/p/w185/' + mov.poster_path,
+									alt: '',
+									__source: {
+										fileName: _jsxFileName,
+										lineNumber: 21
+									},
+									__self: _this2
+								})
+							),
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'div',
+								{ className: 'movDat', __source: {
+										fileName: _jsxFileName,
+										lineNumber: 27
+									},
+									__self: _this2
+								},
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'div',
+									{ className: 'mdate', __source: {
+											fileName: _jsxFileName,
+											lineNumber: 28
+										},
+										__self: _this2
+									},
+									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										'span',
+										{
+											__source: {
+												fileName: _jsxFileName,
+												lineNumber: 29
+											},
+											__self: _this2
+										},
+										mov.release_date
+									)
+								),
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'div',
+									{ className: 'mfav', __source: {
+											fileName: _jsxFileName,
+											lineNumber: 31
+										},
+										__self: _this2
+									},
+									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', {
+										id: mov.id,
+										'data-mov': mov.id,
+										onClick: _this2.handleClick.bind(_this2, mov.id),
+										className: 'heart',
+										__source: {
+											fileName: _jsxFileName,
+											lineNumber: 32
+										},
+										__self: _this2
+									}),
+									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										'span',
+										{
+											__source: {
+												fileName: _jsxFileName,
+												lineNumber: 41
+											},
+											__self: _this2
+										},
+										mov.vote_average
+									)
+								)
+							),
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'div',
+								{ className: 'movTit', __source: {
+										fileName: _jsxFileName,
+										lineNumber: 44
+									},
+									__self: _this2
+								},
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'span',
+									{
+										__source: {
+											fileName: _jsxFileName,
+											lineNumber: 45
+										},
+										__self: _this2
+									},
+									mov.original_language
+								),
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'h4',
+									{
+										__source: {
+											fileName: _jsxFileName,
+											lineNumber: 46
+										},
+										__self: _this2
+									},
+									mov.title
+								)
+							)
+						)
+					);
+				})
+			);
+		}
+	}]);
 
-    return MoviesList;
+	return MoviesList;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 MoviesList.propTypes = {
-    movies: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].array.isRequired
+	movies: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].array.isRequired
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (MoviesList);
@@ -68049,61 +68051,61 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var MovSelect = function (_React$Component) {
-    _inherits(MovSelect, _React$Component);
+	_inherits(MovSelect, _React$Component);
 
-    function MovSelect(props) {
-        _classCallCheck(this, MovSelect);
+	function MovSelect(props) {
+		_classCallCheck(this, MovSelect);
 
-        var _this = _possibleConstructorReturn(this, (MovSelect.__proto__ || Object.getPrototypeOf(MovSelect)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (MovSelect.__proto__ || Object.getPrototypeOf(MovSelect)).call(this, props));
 
-        _this.handleChange = _this.handleChange.bind(_this);
-        return _this;
-    }
+		_this.handleChange = _this.handleChange.bind(_this);
+		return _this;
+	}
 
-    _createClass(MovSelect, [{
-        key: "handleChange",
-        value: function handleChange(events) {
-            console.log(events.target.value);
-            this.props.onSelectYear(events.target.value);
-        }
-    }, {
-        key: "render",
-        value: function render() {
-            var _this2 = this;
+	_createClass(MovSelect, [{
+		key: "handleChange",
+		value: function handleChange(events) {
+			console.log(events.target.value);
+			this.props.onSelectYear(events.target.value);
+		}
+	}, {
+		key: "render",
+		value: function render() {
+			var _this2 = this;
 
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "select",
-                { onChange: function onChange(e) {
-                        return _this2.handleChange(e);
-                    }, className: "list-group", __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 15
-                    },
-                    __self: this
-                },
-                this.props.movYear.map(function (yer) {
-                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "option",
-                        { className: "list-group-item", value: yer, key: yer, __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 17
-                            },
-                            __self: _this2
-                        },
-                        " ",
-                        yer,
-                        " "
-                    );
-                })
-            );
-        }
-    }]);
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				"select",
+				{ onChange: function onChange(e) {
+						return _this2.handleChange(e);
+					}, className: "list-group", __source: {
+						fileName: _jsxFileName,
+						lineNumber: 15
+					},
+					__self: this
+				},
+				this.props.movYear.map(function (yer) {
+					return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						"option",
+						{ className: "list-group-item", value: yer, key: yer, __source: {
+								fileName: _jsxFileName,
+								lineNumber: 17
+							},
+							__self: _this2
+						},
+						' ',
+						yer,
+						' '
+					);
+				})
+			);
+		}
+	}]);
 
-    return MovSelect;
+	return MovSelect;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 MovSelect.propTypes = {
-    movYear: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].array.isRequired
+	movYear: __WEBPACK_IMPORTED_MODULE_0_react__["PropTypes"].array.isRequired
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (MovSelect);
@@ -68120,46 +68122,46 @@ MovSelect.propTypes = {
 var _ = __webpack_require__(405);
 
 var getVisibilityFilter = function getVisibilityFilter(state) {
-    return state.movies.Filter;
+	return state.movies.Filter;
 };
 var getMovies = function getMovies(state) {
-    return state.movies;
+	return state.movies;
 };
 
 var getfilterList = __WEBPACK_IMPORTED_MODULE_0_reselect__["createSelector"]([getVisibilityFilter, getMovies], function (filter, Data) {
-    console.log("getfilterList - - - -- -- ");
-    console.log(filter.filterType);
-    switch (filter.filterType) {
-        case "SHOW_ALL":
-            return Data.list.results;
+	console.log('getfilterList - - - -- -- ');
+	console.log(filter.filterType);
+	switch (filter.filterType) {
+		case 'SHOW_ALL':
+			return Data.list.results;
 
-        case "ASC":
-            var sortAscData = Data.list.results.slice().sort(function (first, second) {
-                return parseFloat(first.vote_average) - parseFloat(second.vote_average);
-            });
-            return sortAscData;
+		case 'ASC':
+			var sortAscData = Data.list.results.slice().sort(function (first, second) {
+				return parseFloat(first.vote_average) - parseFloat(second.vote_average);
+			});
+			return sortAscData;
 
-        case "DES":
-            var sortDesData = Data.list.results.slice().sort(function (first, second) {
-                return parseFloat(second.vote_average) - parseFloat(first.vote_average);
-            });
-            return sortDesData;
+		case 'DES':
+			var sortDesData = Data.list.results.slice().sort(function (first, second) {
+				return parseFloat(second.vote_average) - parseFloat(first.vote_average);
+			});
+			return sortDesData;
 
-        case "YEAR":
-            var MovData = _.filter(Data.list.results, function (arrMovData) {
-                var intYear = arrMovData.release_date.split("-")[0];
-                return intYear == filter.FilterData;
-            });
-            return MovData;
-        case "SEARCH":
-            var updatedList = Data.list.results.filter(function (item) {
-                return item.original_title.toLowerCase().search(filter.FilterData) !== -1;
-            });
-            return updatedList;
+		case 'YEAR':
+			var MovData = _.filter(Data.list.results, function (arrMovData) {
+				var intYear = arrMovData.release_date.split('-')[0];
+				return intYear == filter.FilterData;
+			});
+			return MovData;
+		case 'SEARCH':
+			var updatedList = Data.list.results.filter(function (item) {
+				return item.original_title.toLowerCase().search(filter.FilterData) !== -1;
+			});
+			return updatedList;
 
-        default:
-            return [];
-    }
+		default:
+			return [];
+	}
 });
 
 /***/ }),
@@ -85400,7 +85402,7 @@ function createStructuredSelector(selectors) {
 // import rootReducer from "./ducks";
 
 var configureStore = function configureStore(preloadedState) {
-    return __WEBPACK_IMPORTED_MODULE_0_redux__["d" /* createStore */](__WEBPACK_IMPORTED_MODULE_2__rootReducer__["a" /* default */], preloadedState, __WEBPACK_IMPORTED_MODULE_0_redux__["a" /* applyMiddleware */](__WEBPACK_IMPORTED_MODULE_1_redux_thunk___default.a));
+	return __WEBPACK_IMPORTED_MODULE_0_redux__["d" /* createStore */](__WEBPACK_IMPORTED_MODULE_2__rootReducer__["a" /* default */], preloadedState, __WEBPACK_IMPORTED_MODULE_0_redux__["a" /* applyMiddleware */](__WEBPACK_IMPORTED_MODULE_1_redux_thunk___default.a));
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (configureStore);
@@ -85447,8 +85449,8 @@ exports['default'] = thunk;
 
 
 var rootReducer = __WEBPACK_IMPORTED_MODULE_0_redux__["c" /* combineReducers */]({
-    movies: __WEBPACK_IMPORTED_MODULE_1__movies_moviesReducers__["a" /* default */],
-    newsReducer: __WEBPACK_IMPORTED_MODULE_2__ducks__["a" /* default */]
+	movies: __WEBPACK_IMPORTED_MODULE_1__movies_moviesReducers__["a" /* default */],
+	newsReducer: __WEBPACK_IMPORTED_MODULE_2__ducks__["a" /* default */]
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (rootReducer);
@@ -85464,28 +85466,28 @@ var rootReducer = __WEBPACK_IMPORTED_MODULE_0_redux__["c" /* combineReducers */]
 // import initialState from './initialState';
 
 function movies() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { list: [], year: [], Filter: "" };
-    var action = arguments[1];
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { list: [], year: [], Filter: '' };
+	var action = arguments[1];
 
-    switch (action.type) {
-        case __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["b" /* LOAD_MOVIE_SUCCESS */]:
-            return Object.assign({}, state, { list: action.movs });
+	switch (action.type) {
+		case __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["b" /* LOAD_MOVIE_SUCCESS */]:
+			return Object.assign({}, state, { list: action.movs });
 
-        case __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["c" /* LOAD_MOVIE_YEAR */]:
-            return Object.assign({}, state, { year: action.yearData });
+		case __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["c" /* LOAD_MOVIE_YEAR */]:
+			return Object.assign({}, state, { year: action.yearData });
 
-        case __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["e" /* MOVIE_IS_LOADING */]:
-            return Object.assign({}, state, { MovisLoading: action.bool });
+		case __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["e" /* MOVIE_IS_LOADING */]:
+			return Object.assign({}, state, { MovisLoading: action.bool });
 
-        case __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["d" /* MOVIE_HAS_ERRORED */]:
-            return Object.assign({}, state, { MovishasErrored: action.hasErrored });
+		case __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["d" /* MOVIE_HAS_ERRORED */]:
+			return Object.assign({}, state, { MovishasErrored: action.hasErrored });
 
-        case __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["a" /* LOAD_MOVIE_ALLFILTER */]:
-            return Object.assign({}, state, { Filter: action.filterType });
+		case __WEBPACK_IMPORTED_MODULE_0__MoviesActionTypes__["a" /* LOAD_MOVIE_ALLFILTER */]:
+			return Object.assign({}, state, { Filter: action.filterType });
 
-        default:
-            return state;
-    }
+		default:
+			return state;
+	}
 }
 
 /***/ }),
@@ -85499,7 +85501,7 @@ function movies() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__(154);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__App_css__ = __webpack_require__(411);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__App_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__App_css__);
-var _jsxFileName = "/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/shared/App.js";
+var _jsxFileName = '/Users/vikasabhale/Sites/exp/redux-SSR-R4/src/shared/App.js';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -85515,102 +85517,102 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var App = function (_Component) {
-    _inherits(App, _Component);
+	_inherits(App, _Component);
 
-    function App() {
-        _classCallCheck(this, App);
+	function App() {
+		_classCallCheck(this, App);
 
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-    }
+		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	}
 
-    _createClass(App, [{
-        key: "render",
-        value: function render() {
-            var _this2 = this;
+	_createClass(App, [{
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
 
-            // console.log(this.props.children)
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
-                {
-                    __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 10
-                    },
-                    __self: this
-                },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "navbar", __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 11
-                        },
-                        __self: this
-                    },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "nav",
-                        {
-                            __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 12
-                            },
-                            __self: this
-                        },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["a" /* Link */],
-                            { to: "/", __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 13
-                                },
-                                __self: this
-                            },
-                            "Home"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["a" /* Link */],
-                            { to: "/movies", __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 14
-                                },
-                                __self: this
-                            },
-                            "Movies"
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["a" /* Link */],
-                            { to: "/news", __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 15
-                                },
-                                __self: this
-                            },
-                            "News"
-                        )
-                    )
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    {
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 18
-                        },
-                        __self: this
-                    },
-                    __WEBPACK_IMPORTED_MODULE_2__routes__["a" /* default */].map(function (route, i) {
-                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], Object.assign({ key: i }, route, {
-                            __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 19
-                            },
-                            __self: _this2
-                        }));
-                    })
-                )
-            );
-        }
-    }]);
+			// console.log(this.props.children)
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'div',
+				{
+					__source: {
+						fileName: _jsxFileName,
+						lineNumber: 10
+					},
+					__self: this
+				},
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					{ className: 'navbar', __source: {
+							fileName: _jsxFileName,
+							lineNumber: 11
+						},
+						__self: this
+					},
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'nav',
+						{
+							__source: {
+								fileName: _jsxFileName,
+								lineNumber: 12
+							},
+							__self: this
+						},
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["a" /* Link */],
+							{ to: '/', __source: {
+									fileName: _jsxFileName,
+									lineNumber: 13
+								},
+								__self: this
+							},
+							'Home'
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["a" /* Link */],
+							{ to: '/movies', __source: {
+									fileName: _jsxFileName,
+									lineNumber: 14
+								},
+								__self: this
+							},
+							'Movies'
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["a" /* Link */],
+							{ to: '/news', __source: {
+									fileName: _jsxFileName,
+									lineNumber: 15
+								},
+								__self: this
+							},
+							'News'
+						)
+					)
+				),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					{
+						__source: {
+							fileName: _jsxFileName,
+							lineNumber: 18
+						},
+						__self: this
+					},
+					__WEBPACK_IMPORTED_MODULE_2__routes__["a" /* default */].map(function (route, i) {
+						return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], Object.assign({ key: i }, route, {
+							__source: {
+								fileName: _jsxFileName,
+								lineNumber: 19
+							},
+							__self: _this2
+						}));
+					})
+				)
+			);
+		}
+	}]);
 
-    return App;
+	return App;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (App);
